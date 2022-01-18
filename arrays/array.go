@@ -1,4 +1,4 @@
-package array
+package arrays
 
 // Where returns a new array that passes the predicate function
 func Where[T any](arr []T, predicate func(T) bool) []T {
