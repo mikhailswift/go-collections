@@ -12,7 +12,8 @@ func Where[T any](arr []T, predicate func(T) bool) []T {
   return selected
 }
 
-// First returns the first element that passes the predicate function
+// First returns the first element that passes the predicate function.
+// If no element is found the zero value of the type will be returned.
 func First[T any](arr []T, predicate func(T) bool) T {
   for _, t := range arr {
     if predicate(t) {
@@ -24,7 +25,8 @@ func First[T any](arr []T, predicate func(T) bool) T {
   return zero  
 }
 
-// Last returns the last element that passes the predicate function
+// Last returns the last element that passes the predicate function.
+// If no element is found the zero value of the type will be returned.
 func Last[T any](arr []T, predicate func(T) bool) T {
   for i := len(arr)-1; i >= 0; i-- {
     if predicate(arr[i]) {

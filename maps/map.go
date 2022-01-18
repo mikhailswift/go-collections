@@ -37,7 +37,7 @@ func Union[K comparable, V any](left, right map[K]V) map[K]V {
 }
 
 // UnionInPlace modifies left to include key/value pairs in right.  If a key exists
-// in both left and irght the value in right will be used.
+// in both left and right the value in right will be used.
 func UnionInPlace[K comparable, V any](left, right map[K]V) map[K]V {
   for k, v := range right {
     left[k] = v
