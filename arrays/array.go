@@ -62,9 +62,9 @@ func All[T any](arr []T, predicate func(T) bool) bool {
 
 // Map returns a new array where each element is the result of fn for the corresponding element in the original array
 func Map[T any, U any](arr []T, fn func(T) U) []U {
-  result := make([]U, 0)
-  for _, t := range arr {
-    result = append(result, fn(t))
+  result := make([]U, len(arr))
+  for i, t := range arr {
+    result[i] = fn(t)
   }
 
   return result
