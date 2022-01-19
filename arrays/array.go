@@ -81,6 +81,18 @@ func Contains[T comparable](arr []T, find T) bool {
   return false
 }
 
+// IndexOf returns the index of find if it appears in arr. If find is not in arr, -1 will be returned.
+func IndexOf[T comparable](arr []T, find T) int {
+  for i, t := range arr {
+    if t == find {
+      return i
+    }
+  }
+
+  return -1
+}
+
+
 // GroupBy returns a map that is keyed by keySelector and contains an array of elements returned by valSelector
 func GroupBy[T any, K comparable, V any](arr []T, keySelector func(T) K, valSelector func(T) V) map[K][]V {
   grouping := make(map[K][]V)

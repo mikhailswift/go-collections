@@ -54,6 +54,11 @@ func TestMap(t *testing.T) {
 	)
 }
 
+func TestIndexOf(t *testing.T) {
+	assert.Equal(t, 2, IndexOf([]int{1, 2, 3, 4, 5}, 3))
+	assert.Equal(t, -1, IndexOf([]int{1, 2, 3, 4, 5}, 6))
+}
+
 func TestContains(t *testing.T) {
 	assert.True(t, Contains([]int{1, 2, 3, 4}, 3))
 	assert.False(t, Contains([]string{"a", "b", "test"}, "wednesday"))
