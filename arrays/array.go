@@ -85,7 +85,8 @@ func Contains[T comparable](arr []T, find T) bool {
 func GroupBy[T any, K comparable, V any](arr []T, keySelector func(T) K, valSelector func(T) V) map[K][]V {
   grouping := make(map[K][]V)
   for _, t := range arr {
-    grouping[keySelector(t)] = append(grouping[keySelector(t)], valSelector(t))
+    key := keySelector(t)
+    grouping[key] = append(grouping[key], valSelector(t))
   }
 
   return grouping
