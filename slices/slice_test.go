@@ -6,12 +6,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestWhere(t *testing.T) {
+func TestFilter(t *testing.T) {
 	expected := []int{1, 2, 3}
-	actual := Where([]int{1, 2, 3, 4, 5, 6}, func(x int) bool { return x <= 3 })
+	actual := Filter([]int{1, 2, 3, 4, 5, 6}, func(x int) bool { return x <= 3 })
 	assert.ElementsMatch(t, expected, actual)
 	expected1 := []string{"test"}
-	actual1 := Where([]string{"asdasd", "123123", "test", "test123123"}, func(x string) bool { return x == "test" })
+	actual1 := Filter([]string{"asdasd", "123123", "test", "test123123"}, func(x string) bool { return x == "test" })
 	assert.ElementsMatch(t, expected1, actual1)
 }
 

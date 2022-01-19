@@ -1,7 +1,7 @@
 package slices
 
-// Where returns a new slice consisting of all elements that pass the predicate function
-func Where[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) TSlice {
+// Filter returns a new slice consisting of all elements that pass the predicate function
+func Filter[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) TSlice {
   selected := make(TSlice, 0)
   for _, t := range slice {
     if predicate(t) {
