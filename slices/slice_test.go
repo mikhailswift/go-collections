@@ -1,4 +1,4 @@
-package arrays
+package slices
 
 import (
 	"testing"
