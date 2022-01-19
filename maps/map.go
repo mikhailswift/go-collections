@@ -1,6 +1,6 @@
 package maps
 
-// Keys returns an slice of all keys in m
+// Keys returns a slice of all keys in m
 func Keys[K comparable, V any](m map[K]V) []K {
   keys := make([]K, len(m))
   i := 0
@@ -13,7 +13,7 @@ func Keys[K comparable, V any](m map[K]V) []K {
 }
 
 
-// Values returns an slice of all values in m
+// Values returns a slice of all values in m
 func Values[K comparable, V any](m map[K]V) []V {
   values := make([]V, len(m))
   i := 0

@@ -1,6 +1,6 @@
 package slices
 
-// Where returns a new slice that passes the predicate function
+// Where returns a new slice consisting of all elements that pass the predicate function
 func Where[T any](arr []T, predicate func(T) bool) []T {
   selected := make([]T, 0)
   for _, t := range arr {
@@ -93,7 +93,7 @@ func IndexOf[T comparable](arr []T, find T) int {
 }
 
 
-// GroupBy returns a map that is keyed by keySelector and contains an slice of elements returned by valSelector
+// GroupBy returns a map that is keyed by keySelector and contains a slice of elements returned by valSelector
 func GroupBy[T any, K comparable, V any](arr []T, keySelector func(T) K, valSelector func(T) V) map[K][]V {
   grouping := make(map[K][]V)
   for _, t := range arr {
