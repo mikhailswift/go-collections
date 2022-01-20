@@ -17,30 +17,30 @@ func TestFilter(t *testing.T) {
 
 func TestFirst(t *testing.T) {
 	expected := 1
-	actual := First([]int{-3, -2, -1, 0, 1, 2, 3}, func(x int) bool { return x > 0 })
+	actual := FirstMatch([]int{-3, -2, -1, 0, 1, 2, 3}, func(x int) bool { return x > 0 })
 	assert.Equal(t, expected, actual)
 	expected = 0
-	actual = First([]int{1, 2, 3}, func(x int) bool { return x < 0 })
+	actual = FirstMatch([]int{1, 2, 3}, func(x int) bool { return x < 0 })
 	assert.Equal(t, expected, actual)
 }
 
 func TestLast(t *testing.T) {
 	expected := 3
-	actual := Last([]int{-3, -2, -1, 0, 1, 2, 3}, func(x int) bool { return x > 0 })
+	actual := LastMatch([]int{-3, -2, -1, 0, 1, 2, 3}, func(x int) bool { return x > 0 })
 	assert.Equal(t, expected, actual)
 	expected = 0
-	actual = Last([]int{1, 2, 3}, func(x int) bool { return x < 0 })
+	actual = LastMatch([]int{1, 2, 3}, func(x int) bool { return x < 0 })
 	assert.Equal(t, expected, actual)
 }
 
 func TestAny(t *testing.T) {
-	assert.True(t, Any([]int{1, 1, 2, 3, 5, 8, 13}, func(x int) bool { return x > 10 }))
-	assert.False(t, Any([]int{1, 1, 2, 3, 5, 8, 13}, func(x int) bool { return x < 0 }))
+	assert.True(t, AnyMatch([]int{1, 1, 2, 3, 5, 8, 13}, func(x int) bool { return x > 10 }))
+	assert.False(t, AnyMatch([]int{1, 1, 2, 3, 5, 8, 13}, func(x int) bool { return x < 0 }))
 }
 
 func TestAll(t *testing.T) {
-	assert.True(t, All([]int{1, 2, 3}, func(x int) bool { return x > 0 }))
-	assert.False(t, All([]int{-1, 0, 1, 2, 3}, func(x int) bool { return x > 0 }))
+	assert.True(t, AllMatch([]int{1, 2, 3}, func(x int) bool { return x > 0 }))
+	assert.False(t, AllMatch([]int{-1, 0, 1, 2, 3}, func(x int) bool { return x > 0 }))
 }
 
 func TestMap(t *testing.T) {

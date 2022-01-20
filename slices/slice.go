@@ -12,9 +12,9 @@ func Filter[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) TSlice {
   return selected
 }
 
-// First returns the first element that passes the predicate function.
+// FirstMatch returns the first element that passes the predicate function.
 // If no element is found the zero value of the type will be returned.
-func First[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) T {
+func FirstMatch[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) T {
   for _, t := range slice {
     if predicate(t) {
       return t
@@ -25,9 +25,9 @@ func First[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) T {
   return zero  
 }
 
-// Last returns the last element that passes the predicate function.
+// LastMatch returns the last element that passes the predicate function.
 // If no element is found the zero value of the type will be returned.
-func Last[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) T {
+func LastMatch[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) T {
   for i := len(slice)-1; i >= 0; i-- {
     if predicate(slice[i]) {
       return slice[i]
@@ -38,8 +38,8 @@ func Last[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) T {
   return zero 
 }
 
-// Any returns true if any element passes the predicate function
-func Any[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) bool {
+// AnyMatch returns true if any element passes the predicate function
+func AnyMatch[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) bool {
   for _, t := range slice {
     if predicate(t) {
       return true
@@ -49,8 +49,8 @@ func Any[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) bool {
   return false
 }
 
-// All returns true if all elements pass the predicate function
-func All[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) bool {
+// AllMatch returns true if all elements pass the predicate function
+func AllMatch[TSlice ~[]T, T any](slice TSlice, predicate func(T) bool) bool {
   for _, t := range slice {
     if !predicate(t) {
       return false
