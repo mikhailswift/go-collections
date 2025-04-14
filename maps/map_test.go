@@ -1,6 +1,7 @@
 package maps
 
 import (
+	"collections/slices"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -13,8 +14,8 @@ func TestKeysValues(t *testing.T) {
 		3: "three",
 	}
 
-	assert.ElementsMatch(t, []int{1, 2, 3}, Keys(m))
-	assert.ElementsMatch(t, []string{"one", "two", "three"}, Values(m))
+	assert.ElementsMatch(t, []int{1, 2, 3}, slices.YieldAll[[]int](Keys(m)))
+	assert.ElementsMatch(t, []string{"one", "two", "three"}, slices.YieldAll[[]string](Values(m)))
 }
 
 func TestUnion(t *testing.T) {
@@ -86,5 +87,4 @@ func TestDifference(t *testing.T) {
 	}
 
 	assert.Equal(t, expected, Difference(a, b))
-
 }

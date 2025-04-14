@@ -1,6 +1,7 @@
 package slices
 
 import (
+	"collections/maps"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -8,10 +9,10 @@ import (
 
 func TestFilter(t *testing.T) {
 	expected := []int{1, 2, 3}
-	actual := Filter([]int{1, 2, 3, 4, 5, 6}, func(x int) bool { return x <= 3 })
+	actual := YieldAll[[]int](Filter([]int{1, 2, 3, 4, 5, 6}, func(x int) bool { return x <= 3 }))
 	assert.ElementsMatch(t, expected, actual)
 	expected1 := []string{"test"}
-	actual1 := Filter([]string{"asdasd", "123123", "test", "test123123"}, func(x string) bool { return x == "test" })
+	actual1 := YieldAll[[]string](Filter([]string{"asdasd", "123123", "test", "test123123"}, func(x string) bool { return x == "test" }))
 	assert.ElementsMatch(t, expected1, actual1)
 }
 
@@ -46,11 +47,11 @@ func TestAll(t *testing.T) {
 func TestMap(t *testing.T) {
 	assert.ElementsMatch(t,
 		[]int{2, 4, 6, 8},
-		Map([]int{1, 2, 3, 4}, func(x int) int { return 2 * x }),
+		Map[[]int]([]int{1, 2, 3, 4}, func(x int) int { return 2 * x }),
 	)
 	assert.ElementsMatch(t,
 		[]int{4, 1, 6},
-		Map([]string{"test", "a", "golang"}, func(x string) int { return len(x) }),
+		Map[[]string]([]string{"test", "a", "golang"}, func(x string) int { return len(x) }),
 	)
 }
 
@@ -81,10 +82,10 @@ func TestGroupBy(t *testing.T) {
 
 	assert.Equal(t,
 		map[int][]person{
-			0: []person{alice},
-			1: []person{bob, carol},
-			2: []person{eugene},
-			9: []person{david, francene},
+			0: {alice},
+			1: {bob, carol},
+			2: {eugene},
+			9: {david, francene},
 		},
 		GroupBy(employees, func(p person) int { return p.ManagerID }, func(p person) person { return p }),
 	)
@@ -107,17 +108,17 @@ func TestToSet(t *testing.T) {
 	}
 
 	assert.Equal(t,
-		map[int]struct{}{1: struct{}{}, 2: struct{}{}, 9: struct{}{}},
-		ToSet(people, func(p person) int { return p.ID }),
+		map[int]struct{}{1: {}, 2: {}, 9: {}},
+		maps.YieldAll[map[int]struct{}](ToSet(people, func(p person) int { return p.ID })),
 	)
 
 	assert.Equal(t,
 		map[string]struct{}{
-			"Alice": struct{}{},
-			"Bob":   struct{}{},
-			"Carol": struct{}{},
+			"Alice": {},
+			"Bob":   {},
+			"Carol": {},
 		},
-		ToSet(people, func(p person) string { return p.Name }),
+		maps.YieldAll[map[string]struct{}](ToSet(people, func(p person) string { return p.Name })),
 	)
 }
 
@@ -133,7 +134,7 @@ func TestToMap(t *testing.T) {
 			2: bob,
 			9: carol,
 		},
-		ToMap(people, func(p person) int { return p.ID }, func(p person) person { return p }),
+		maps.YieldAll[map[int]person](ToMap(people, func(p person) int { return p.ID }, func(p person) person { return p })),
 	)
 
 	assert.Equal(t,
@@ -142,6 +143,6 @@ func TestToMap(t *testing.T) {
 			"Bob":   bob,
 			"Carol": carol,
 		},
-		ToMap(people, func(p person) string { return p.Name }, func(p person) person { return p }),
+		maps.YieldAll[map[string]person](ToMap(people, func(p person) string { return p.Name }, func(p person) person { return p })),
 	)
 }
